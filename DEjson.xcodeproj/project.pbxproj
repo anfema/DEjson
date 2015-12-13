@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F499FD61BA19F1F00E1AC15 /* DEjson.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F499FD51BA19F1F00E1AC15 /* DEjson.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F499FDD1BA19F2000E1AC15 /* DEjson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F499FD21BA19F1F00E1AC15 /* DEjson.framework */; };
+		8F499FE21BA19F2000E1AC15 /* DEjsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FE11BA19F2000E1AC15 /* DEjsonTests.swift */; };
+		8F499FEF1BA19F4F00E1AC15 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FEC1BA19F4F00E1AC15 /* JSONDecoder.swift */; };
+		8F499FF01BA19F4F00E1AC15 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FEC1BA19F4F00E1AC15 /* JSONDecoder.swift */; };
+		8F499FF11BA19F4F00E1AC15 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FED1BA19F4F00E1AC15 /* JSONEncoder.swift */; };
+		8F499FF21BA19F4F00E1AC15 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FED1BA19F4F00E1AC15 /* JSONEncoder.swift */; };
+		8F499FF31BA19F4F00E1AC15 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FEE1BA19F4F00E1AC15 /* JSONObject.swift */; };
+		8F499FF41BA19F4F00E1AC15 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FEE1BA19F4F00E1AC15 /* JSONObject.swift */; };
+		8FC26A1F1BB9435D00E38569 /* DEjson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC26A151BB9435D00E38569 /* DEjson.framework */; };
+		8FC26A2C1BB943A400E38569 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FEC1BA19F4F00E1AC15 /* JSONDecoder.swift */; };
+		8FC26A2D1BB943A400E38569 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FED1BA19F4F00E1AC15 /* JSONEncoder.swift */; };
+		8FC26A2E1BB943A400E38569 /* JSONObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FEE1BA19F4F00E1AC15 /* JSONObject.swift */; };
+		8FC26A731BB9524700E38569 /* DEjsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F499FE11BA19F2000E1AC15 /* DEjsonTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F499FDE1BA19F2000E1AC15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F499FC91BA19F1F00E1AC15 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F499FD11BA19F1F00E1AC15;
+			remoteInfo = DEjson;
+		};
+		8FC26A201BB9435D00E38569 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F499FC91BA19F1F00E1AC15 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8FC26A141BB9435D00E38569;
+			remoteInfo = dejson;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8F499FD21BA19F1F00E1AC15 /* DEjson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DEjson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F499FD51BA19F1F00E1AC15 /* DEjson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEjson.h; sourceTree = "<group>"; };
+		8F499FD71BA19F1F00E1AC15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F499FDC1BA19F2000E1AC15 /* DEjson_ios_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DEjson_ios_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F499FE11BA19F2000E1AC15 /* DEjsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEjsonTests.swift; sourceTree = "<group>"; };
+		8F499FE31BA19F2000E1AC15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F499FEC1BA19F4F00E1AC15 /* JSONDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
+		8F499FED1BA19F4F00E1AC15 /* JSONEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncoder.swift; sourceTree = "<group>"; };
+		8F499FEE1BA19F4F00E1AC15 /* JSONObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONObject.swift; sourceTree = "<group>"; };
+		8F4DD9461BEA5C7B000F917A /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
+		8FC26A151BB9435D00E38569 /* DEjson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DEjson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FC26A1E1BB9435D00E38569 /* DEjson_osx_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DEjson_osx_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F499FCE1BA19F1F00E1AC15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F499FD91BA19F2000E1AC15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F499FDD1BA19F2000E1AC15 /* DEjson.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A111BB9435D00E38569 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A1B1BB9435D00E38569 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FC26A1F1BB9435D00E38569 /* DEjson.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		423636151C1DE88000DB2160 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				8F499FD51BA19F1F00E1AC15 /* DEjson.h */,
+				8F499FD71BA19F1F00E1AC15 /* Info.plist */,
+			);
+			path = OSX;
+			sourceTree = "<group>";
+		};
+		8F499FC81BA19F1F00E1AC15 = {
+			isa = PBXGroup;
+			children = (
+				8F4DD9461BEA5C7B000F917A /* LICENSE.txt */,
+				8F499FD41BA19F1F00E1AC15 /* Sources */,
+				8F499FE01BA19F2000E1AC15 /* Tests */,
+				423636151C1DE88000DB2160 /* OSX */,
+				8F499FD31BA19F1F00E1AC15 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8F499FD31BA19F1F00E1AC15 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F499FD21BA19F1F00E1AC15 /* DEjson.framework */,
+				8F499FDC1BA19F2000E1AC15 /* DEjson_ios_tests.xctest */,
+				8FC26A151BB9435D00E38569 /* DEjson.framework */,
+				8FC26A1E1BB9435D00E38569 /* DEjson_osx_tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F499FD41BA19F1F00E1AC15 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8F499FEC1BA19F4F00E1AC15 /* JSONDecoder.swift */,
+				8F499FED1BA19F4F00E1AC15 /* JSONEncoder.swift */,
+				8F499FEE1BA19F4F00E1AC15 /* JSONObject.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		8F499FE01BA19F2000E1AC15 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8F499FE11BA19F2000E1AC15 /* DEjsonTests.swift */,
+				8F499FE31BA19F2000E1AC15 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8F499FCF1BA19F1F00E1AC15 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F499FD61BA19F1F00E1AC15 /* DEjson.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A121BB9435D00E38569 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8F499FD11BA19F1F00E1AC15 /* DEjson_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F499FE61BA19F2000E1AC15 /* Build configuration list for PBXNativeTarget "DEjson_ios" */;
+			buildPhases = (
+				8F499FCD1BA19F1F00E1AC15 /* Sources */,
+				8F499FCE1BA19F1F00E1AC15 /* Frameworks */,
+				8F499FCF1BA19F1F00E1AC15 /* Headers */,
+				8F499FD01BA19F1F00E1AC15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DEjson_ios;
+			productName = DEjson;
+			productReference = 8F499FD21BA19F1F00E1AC15 /* DEjson.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8F499FDB1BA19F2000E1AC15 /* DEjson_ios_tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F499FE91BA19F2000E1AC15 /* Build configuration list for PBXNativeTarget "DEjson_ios_tests" */;
+			buildPhases = (
+				8F499FD81BA19F2000E1AC15 /* Sources */,
+				8F499FD91BA19F2000E1AC15 /* Frameworks */,
+				8F499FDA1BA19F2000E1AC15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F499FDF1BA19F2000E1AC15 /* PBXTargetDependency */,
+			);
+			name = DEjson_ios_tests;
+			productName = DEjsonTests;
+			productReference = 8F499FDC1BA19F2000E1AC15 /* DEjson_ios_tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8FC26A141BB9435D00E38569 /* DEjson_osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8FC26A2A1BB9435D00E38569 /* Build configuration list for PBXNativeTarget "DEjson_osx" */;
+			buildPhases = (
+				8FC26A101BB9435D00E38569 /* Sources */,
+				8FC26A111BB9435D00E38569 /* Frameworks */,
+				8FC26A121BB9435D00E38569 /* Headers */,
+				8FC26A131BB9435D00E38569 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DEjson_osx;
+			productName = dejson;
+			productReference = 8FC26A151BB9435D00E38569 /* DEjson.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8FC26A1D1BB9435D00E38569 /* DEjson_osx_tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8FC26A2B1BB9435D00E38569 /* Build configuration list for PBXNativeTarget "DEjson_osx_tests" */;
+			buildPhases = (
+				8FC26A1A1BB9435D00E38569 /* Sources */,
+				8FC26A1B1BB9435D00E38569 /* Frameworks */,
+				8FC26A1C1BB9435D00E38569 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8FC26A211BB9435D00E38569 /* PBXTargetDependency */,
+			);
+			name = DEjson_osx_tests;
+			productName = dejsonTests;
+			productReference = 8FC26A1E1BB9435D00E38569 /* DEjson_osx_tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F499FC91BA19F1F00E1AC15 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = anfema;
+				TargetAttributes = {
+					8F499FD11BA19F1F00E1AC15 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					8F499FDB1BA19F2000E1AC15 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					8FC26A141BB9435D00E38569 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					8FC26A1D1BB9435D00E38569 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 8F499FCC1BA19F1F00E1AC15 /* Build configuration list for PBXProject "DEjson" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8F499FC81BA19F1F00E1AC15;
+			productRefGroup = 8F499FD31BA19F1F00E1AC15 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8F499FD11BA19F1F00E1AC15 /* DEjson_ios */,
+				8F499FDB1BA19F2000E1AC15 /* DEjson_ios_tests */,
+				8FC26A141BB9435D00E38569 /* DEjson_osx */,
+				8FC26A1D1BB9435D00E38569 /* DEjson_osx_tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F499FD01BA19F1F00E1AC15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F499FDA1BA19F2000E1AC15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A131BB9435D00E38569 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A1C1BB9435D00E38569 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8F499FCD1BA19F1F00E1AC15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F499FF11BA19F4F00E1AC15 /* JSONEncoder.swift in Sources */,
+				8F499FF31BA19F4F00E1AC15 /* JSONObject.swift in Sources */,
+				8F499FEF1BA19F4F00E1AC15 /* JSONDecoder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F499FD81BA19F2000E1AC15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F499FF41BA19F4F00E1AC15 /* JSONObject.swift in Sources */,
+				8F499FF01BA19F4F00E1AC15 /* JSONDecoder.swift in Sources */,
+				8F499FF21BA19F4F00E1AC15 /* JSONEncoder.swift in Sources */,
+				8F499FE21BA19F2000E1AC15 /* DEjsonTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A101BB9435D00E38569 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FC26A2C1BB943A400E38569 /* JSONDecoder.swift in Sources */,
+				8FC26A2D1BB943A400E38569 /* JSONEncoder.swift in Sources */,
+				8FC26A2E1BB943A400E38569 /* JSONObject.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC26A1A1BB9435D00E38569 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FC26A731BB9524700E38569 /* DEjsonTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F499FDF1BA19F2000E1AC15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F499FD11BA19F1F00E1AC15 /* DEjson_ios */;
+			targetProxy = 8F499FDE1BA19F2000E1AC15 /* PBXContainerItemProxy */;
+		};
+		8FC26A211BB9435D00E38569 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8FC26A141BB9435D00E38569 /* DEjson_osx */;
+			targetProxy = 8FC26A201BB9435D00E38569 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8F499FE41BA19F2000E1AC15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8F499FE51BA19F2000E1AC15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8F499FE71BA19F2000E1AC15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.DEjson.ios;
+				PRODUCT_NAME = DEjson;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8F499FE81BA19F2000E1AC15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.DEjson.ios;
+				PRODUCT_NAME = DEjson;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8F499FEA1BA19F2000E1AC15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.DEjsonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8F499FEB1BA19F2000E1AC15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.DEjsonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8FC26A261BB9435D00E38569 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = OSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.DEjson.osx;
+				PRODUCT_NAME = DEjson;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8FC26A271BB9435D00E38569 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = OSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.DEjson.osx;
+				PRODUCT_NAME = DEjson;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8FC26A281BB9435D00E38569 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.dejsonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8FC26A291BB9435D00E38569 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anfema.dejsonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F499FCC1BA19F1F00E1AC15 /* Build configuration list for PBXProject "DEjson" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F499FE41BA19F2000E1AC15 /* Debug */,
+				8F499FE51BA19F2000E1AC15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F499FE61BA19F2000E1AC15 /* Build configuration list for PBXNativeTarget "DEjson_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F499FE71BA19F2000E1AC15 /* Debug */,
+				8F499FE81BA19F2000E1AC15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F499FE91BA19F2000E1AC15 /* Build configuration list for PBXNativeTarget "DEjson_ios_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F499FEA1BA19F2000E1AC15 /* Debug */,
+				8F499FEB1BA19F2000E1AC15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8FC26A2A1BB9435D00E38569 /* Build configuration list for PBXNativeTarget "DEjson_osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8FC26A261BB9435D00E38569 /* Debug */,
+				8FC26A271BB9435D00E38569 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8FC26A2B1BB9435D00E38569 /* Build configuration list for PBXNativeTarget "DEjson_osx_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8FC26A281BB9435D00E38569 /* Debug */,
+				8FC26A291BB9435D00E38569 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F499FC91BA19F1F00E1AC15 /* Project object */;
+}
