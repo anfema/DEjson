@@ -21,56 +21,59 @@ public class JSONDecoder {
 
     public var jsonObject: JSONObject {
         var generator = self.string!.generate()
-        return self.scanObject(&generator)
+        let result = self.scanObject(&generator)
+        return result.obj
     }
     
-    func scanObject(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar = UnicodeScalar(0)) -> (JSONObject) {
-        func parse(c: UnicodeScalar, inout generator: String.UnicodeScalarView.Generator) -> (JSONObject?) {
+    func scanObject(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar = UnicodeScalar(0)) -> (obj: JSONObject, backtrackChar: UnicodeScalar?) {
+        func parse(c: UnicodeScalar, inout generator: String.UnicodeScalarView.Generator) -> (obj: JSONObject?, backtrackChar: UnicodeScalar?) {
             switch c.value {
             case 9, 10, 13, 32: // space, tab, newline, cr
-                return nil
+                return (obj: nil, backtrackChar: nil)
             case 123: // {
                 if let dict = self.parseDict(&generator) {
-                    return .JSONDictionary(dict)
+                    return (obj: .JSONDictionary(dict), backtrackChar: nil)
                 } else {
-                    return .JSONInvalid
+                    return (obj: .JSONInvalid, backtrackChar: nil)
                 }
             case 91: // [
-                return .JSONArray(self.parseArray(&generator))
+                return (obj: .JSONArray(self.parseArray(&generator)), backtrackChar: nil)
             case 34: // "
-                return .JSONString(self.parseString(&generator))
+                return (obj: .JSONString(self.parseString(&generator)), backtrackChar: nil)
             case 43, 45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57: // 0-9, -, +
-                if let num = self.parseNumber(&generator, currentChar: c) {
-                    return .JSONNumber(num)
+                let result = self.parseNumber(&generator, currentChar: c)
+                if let num = result.number {
+                    return (obj: .JSONNumber(num), backtrackChar: result.backtrackChar)
                 } else {
-                    return .JSONInvalid
+                    return (obj: .JSONInvalid, backtrackChar: result.backtrackChar)
                 }
             case 102, 110, 116: // f, n, t
                 if let b = self.parseStatement(&generator, currentChar: c) {
-					return .JSONBoolean(b)
+					return (obj: .JSONBoolean(b), backtrackChar: nil)
                 } else {
-                    return .JSONNull
+                    return (obj: .JSONNull, backtrackChar: nil)
                 }
             default:
                 // found an invalid char
-                return .JSONInvalid
+                return (obj: .JSONInvalid, backtrackChar: nil)
             }
         }
 
         if currentChar.value != 0 {
-            if let obj = parse(currentChar, generator: &generator) {
-                return obj
+            let obj = parse(currentChar, generator: &generator)
+            if obj.obj != nil {
+                return (obj: obj.obj!, backtrackChar: obj.backtrackChar)
             }
         } else {
             while let c = generator.next() {
-                if let obj = parse(c, generator: &generator) {
-                    return obj
+                let obj = parse(c, generator: &generator)
+                if obj.obj != nil {
+                    return (obj: obj.obj!, backtrackChar: obj.backtrackChar)
                 }
             }
         }
         
-        
-        return .JSONInvalid
+        return (obj: .JSONInvalid, backtrackChar: nil)
     }
     
     // TODO: Add tests for escaped characters
@@ -147,23 +150,33 @@ public class JSONDecoder {
         var dictKey: String? = nil
         var dictEnded = false
 
-        while let c = generator.next() {
-            switch c.value {
-            case 9, 10, 13, 32, 44: // space, tab, newline, cr, ','
-                continue
-            case 34: // "
-                dictKey = self.parseString(&generator)
-            case 58: // :
-                if let key = dictKey {
-                    dict.updateValue(self.scanObject(&generator), forKey: key)
-                    dictKey = nil
-                } else {
+        while var c = generator.next() {
+            while true {
+                switch c.value {
+                case 9, 10, 13, 32, 44: // space, tab, newline, cr, ','
+                    break
+                case 34: // "
+                    dictKey = self.parseString(&generator)
+                case 58: // :
+                    if let key = dictKey {
+                        let result = self.scanObject(&generator)
+                        dict.updateValue(result.obj, forKey: key)
+                        dictKey = nil
+                        
+                        // Backtrack one character
+                        if let backTrack = result.backtrackChar {
+                            c = backTrack
+                            continue
+                        }
+                    } else {
+                        dictEnded = true
+                    }
+                case 125: // }
                     dictEnded = true
+                default:
+                    return nil
                 }
-            case 125: // }
-                dictEnded = true
-            default:
-                return nil
+                break
             }
             if dictEnded {
                 break
@@ -177,14 +190,24 @@ public class JSONDecoder {
         var arr : Array<JSONObject> = Array()
         var arrayEnded = false
 
-        while let c = generator.next() {
-            switch c.value {
-            case 9, 10, 13, 32, 44: // space, tab, newline, cr, ','
-                continue
-            case 93: // ]
-                arrayEnded = true
-            default:
-                arr.append(self.scanObject(&generator, currentChar: c))
+        while var c = generator.next() {
+            while true {
+                switch c.value {
+                case 9, 10, 13, 32, 44: // space, tab, newline, cr, ','
+                    break
+                case 93: // ]
+                    arrayEnded = true
+                default:
+                    let result = self.scanObject(&generator, currentChar: c)
+                    arr.append(result.obj)
+
+                    // Backtrack one character
+                    if let backTrack = result.backtrackChar {
+                        c = backTrack
+                        continue
+                    }
+                }
+                break
             }
             if (arrayEnded) {
                 break
@@ -195,7 +218,7 @@ public class JSONDecoder {
     }
 
     // TODO: Add tests for negative numbers and exponential notations
-    func parseNumber(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar) -> (Double?) {
+    func parseNumber(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar) -> (number: Double?, backtrackChar: UnicodeScalar?) {
         var numberEnded = false
         var numberStarted = false
         var exponentStarted = false
@@ -207,7 +230,8 @@ public class JSONDecoder {
         var decimalCount : Int = 0
         var number : Double = 0.0
 
-        func parse(c: UnicodeScalar, inout generator: String.UnicodeScalarView.Generator) -> (Bool?) {
+        func parse(c: UnicodeScalar, inout generator: String.UnicodeScalarView.Generator) -> (numberEnded: Bool?, backtrackChar: UnicodeScalar?) {
+            var backtrack: UnicodeScalar? = nil
             switch (c.value) {
             case 9, 10, 13, 32: // space, tab, newline, cr
                 if numberStarted {
@@ -216,7 +240,7 @@ public class JSONDecoder {
             case 43, 45: // +, -
                 if (numberStarted && !exponentStarted) || (exponentStarted && exponentNumberStarted) {
                     // error
-                    return nil
+                    return (numberEnded: nil, backtrackChar: nil)
                 } else if !numberStarted {
                     numberStarted = true
                     if c.value == 45 {
@@ -241,55 +265,58 @@ public class JSONDecoder {
             case 46: // .
                 if decimalStarted {
                     // error
-                    return nil
+                    return (numberEnded: nil, backtrackChar: nil)
                 } else {
                     decimalStarted = true
                 }
             case 69, 101: // E, e
                 if exponentStarted {
                     // error
-                    return nil
+                    return (numberEnded: nil, backtrackChar: nil)
                 } else {
                     exponentStarted = true
                 }
             default:
                 if numberStarted {
+                    backtrack = c
                     numberEnded = true
                 } else {
-                    return nil
+                    return (numberEnded: nil, backtrackChar: nil)
                 }
             }
             if numberEnded {
                 let e = __exp10(Double(exponent - decimalCount))
                 number = number * e
                 number *= sign
-                return true
+                return (numberEnded: true, backtrackChar: backtrack)
             }
-            return false
+            return (numberEnded: false, backtrackChar: backtrack)
         }
         
-        if let numberEnded = parse(currentChar, generator: &generator) {
+        let result = parse(currentChar, generator: &generator)
+        if let numberEnded = result.numberEnded {
             if numberEnded {
-                return number
+                return (number: number, backtrackChar: result.backtrackChar)
             }
         } else {
-            return nil
+            return (number: nil, backtrackChar: result.backtrackChar)
         }
         
         while let c = generator.next() {
-            if let numberEnded = parse(c, generator: &generator) {
+            let result = parse(c, generator: &generator)
+            if let numberEnded = result.numberEnded {
                 if numberEnded {
-                    return number
+                    return (number: number, backtrackChar: result.backtrackChar)
                 }
             } else {
-                return nil
+                return (number: nil, backtrackChar: result.backtrackChar)
             }
         }
 
         let e = __exp10(Double(exponent - decimalCount))
         number = number * e
         number *= sign
-        return number
+        return (number: number, backtrackChar: nil)
     }
 
     // TODO: Add tests for true, false and null

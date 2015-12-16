@@ -65,6 +65,70 @@ class DEjsonTests: XCTestCase {
         }
     }
 
+    func testJSONNumberInArray() {
+        let obj = JSONDecoder("[123, 234]").jsonObject
+        if case .JSONArray(let array) = obj {
+            XCTAssert(array.count == 2)
+            if case .JSONNumber(let num) = array[0] {
+                XCTAssert(num == 123)
+            } else {
+                XCTFail("Not a number")
+            }
+            if case .JSONNumber(let num) = array[1] {
+                XCTAssert(num == 234)
+            } else {
+                XCTFail("Not a number")
+            }
+        } else {
+            XCTFail("Object not an array")
+        }
+    }
+
+    func testJSONNumberInDict() {
+        let obj = JSONDecoder("{\"first\":123, \"second\":234}").jsonObject
+        if case .JSONDictionary(let dict) = obj {
+            XCTAssert(dict.count == 2)
+            if case .JSONNumber(let num) = dict["first"]! {
+                XCTAssert(num == 123)
+            } else {
+                XCTFail("Not a number")
+            }
+            if case .JSONNumber(let num) = dict["second"]! {
+                XCTAssert(num == 234)
+            } else {
+                XCTFail("Not a number")
+            }
+        } else {
+            XCTFail("Object not a dictionary")
+        }
+    }
+
+    func testJSONNumberInArrayOfDicts() {
+        let obj = JSONDecoder("[{\"first\":123,\"second\":234},{\"first\":123,\"second\":234}]").jsonObject
+        if case .JSONArray(let array) = obj {
+            XCTAssert(array.count == 2)
+            for item in array {
+                if case .JSONDictionary(let dict) = item {
+                    XCTAssert(dict.count == 2)
+                    if case .JSONNumber(let num) = dict["first"]! {
+                        XCTAssert(num == 123)
+                    } else {
+                        XCTFail("Not a number")
+                    }
+                    if case .JSONNumber(let num) = dict["second"]! {
+                        XCTAssert(num == 234)
+                    } else {
+                        XCTFail("Not a number")
+                    }
+                } else {
+                    XCTFail("Object not a dictionary")
+                }
+            }
+        } else {
+            XCTFail("Object not array")
+        }
+    }
+
     func testJSONDecoderComplex1() {
         let obj = JSONDecoder("[{\"t\":\"1\",\"v\":\"1\",\"b\":false},{\"t\":\"2\",\"v\":\"1\",\"b\":false},{\"t\":\"3\",\"v\":\"1\",\"b\":false}]").jsonObject
         if case .JSONArray(let array) = obj {
