@@ -255,7 +255,7 @@ public class JSONDecoder {
                     exponentNumberStarted = true
                 }
                 if decimalStarted {
-                    decimalCount++
+                    decimalCount += 1
                     number = number * 10.0 + Double(c.value - 48)
                 } else if numberStarted {
                     number = number * 10.0 + Double(c.value - 48)
