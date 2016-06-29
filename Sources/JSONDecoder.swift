@@ -105,7 +105,14 @@ public class JSONDecoder {
                     let d2 = self.parseHexDigit(generator.next())
                     let d3 = self.parseHexDigit(generator.next())
                     let d4 = self.parseHexDigit(generator.next())
-                    let codepoint = (d1 << 12) | (d2 << 8) | (d3 << 4) | d4;
+                    var codepoint = (d1 << 12) | (d2 << 8) | (d3 << 4) | d4;
+                    
+                    // validate that the codepoint is actually valid unicode, else apple likes to crash our app
+                    // see: https://bugs.swift.org/browse/SR-1930
+                    if (codepoint > 0xD800 && codepoint < 0xDFFF) || (codepoint > 0x10FFFF) {
+                        codepoint = 0x3F
+                    }
+                    
                     string.append(UnicodeScalar(codepoint))
                 default:
                     string.append(c)
