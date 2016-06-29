@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "DEjson"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "JSON parser and serializer in pure swift."
   s.description  = <<-DESC
                     Error resilient JSON parser and serializer in pure swift.
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.4"
   s.osx.deployment_target = "10.10"
 
-  s.source       = { :git => "https://github.com/anfema/DEjson.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/anfema/DEjson.git", :tag => "1.0.2" }
   s.source_files  = "Sources/*.swift"
-  
+
 end
