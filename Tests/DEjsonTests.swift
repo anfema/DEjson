@@ -23,7 +23,7 @@ class DEjsonTests: XCTestCase {
     
     func testJSONDecoderStringFragment() {
         let obj = JSONDecoder("\"string\"").jsonObject
-        if case .JSONString(let string) = obj {
+        if case .jsonString(let string) = obj {
             XCTAssert(string == "string")
         } else {
             XCTFail("value is not a string")
@@ -32,7 +32,7 @@ class DEjsonTests: XCTestCase {
 
     func testJSONDecoderNumberFragment() {
         let obj = JSONDecoder("1.567").jsonObject
-        if case .JSONNumber(let number) = obj {
+        if case .jsonNumber(let number) = obj {
             XCTAssert(number == 1.567)
         } else {
             XCTFail("value is not a number")
@@ -41,7 +41,7 @@ class DEjsonTests: XCTestCase {
 
     func testJSONDecoderFalseFragment() {
         let obj = JSONDecoder("false").jsonObject
-        if case .JSONBoolean(let bool) = obj {
+        if case .jsonBoolean(let bool) = obj {
             XCTAssert(bool == false)
         } else {
             XCTFail("value is not a bool")
@@ -50,7 +50,7 @@ class DEjsonTests: XCTestCase {
 
     func testJSONDecoderTrueFragment() {
         let obj = JSONDecoder("true").jsonObject
-        if case .JSONBoolean(let bool) = obj {
+        if case .jsonBoolean(let bool) = obj {
             XCTAssert(bool == true)
         } else {
             XCTFail("value is not a bool")
@@ -59,7 +59,7 @@ class DEjsonTests: XCTestCase {
 
     func testJSONDecoderNullFragment() {
         let obj = JSONDecoder("null").jsonObject
-        if case .JSONNull = obj {
+        if case .jsonNull = obj {
         } else {
             XCTFail("value is not null")
         }
@@ -67,14 +67,14 @@ class DEjsonTests: XCTestCase {
 
     func testJSONNumberInArray() {
         let obj = JSONDecoder("[123, 234]").jsonObject
-        if case .JSONArray(let array) = obj {
+        if case .jsonArray(let array) = obj {
             XCTAssert(array.count == 2)
-            if case .JSONNumber(let num) = array[0] {
+            if case .jsonNumber(let num) = array[0] {
                 XCTAssert(num == 123)
             } else {
                 XCTFail("Not a number")
             }
-            if case .JSONNumber(let num) = array[1] {
+            if case .jsonNumber(let num) = array[1] {
                 XCTAssert(num == 234)
             } else {
                 XCTFail("Not a number")
@@ -86,14 +86,14 @@ class DEjsonTests: XCTestCase {
 
     func testJSONNumberInDict() {
         let obj = JSONDecoder("{\"first\":123, \"second\":234}").jsonObject
-        if case .JSONDictionary(let dict) = obj {
+        if case .jsonDictionary(let dict) = obj {
             XCTAssert(dict.count == 2)
-            if case .JSONNumber(let num) = dict["first"]! {
+            if case .jsonNumber(let num) = dict["first"]! {
                 XCTAssert(num == 123)
             } else {
                 XCTFail("Not a number")
             }
-            if case .JSONNumber(let num) = dict["second"]! {
+            if case .jsonNumber(let num) = dict["second"]! {
                 XCTAssert(num == 234)
             } else {
                 XCTFail("Not a number")
@@ -105,17 +105,17 @@ class DEjsonTests: XCTestCase {
 
     func testJSONNumberInArrayOfDicts() {
         let obj = JSONDecoder("[{\"first\":123,\"second\":234},{\"first\":123,\"second\":234}]").jsonObject
-        if case .JSONArray(let array) = obj {
+        if case .jsonArray(let array) = obj {
             XCTAssert(array.count == 2)
             for item in array {
-                if case .JSONDictionary(let dict) = item {
+                if case .jsonDictionary(let dict) = item {
                     XCTAssert(dict.count == 2)
-                    if case .JSONNumber(let num) = dict["first"]! {
+                    if case .jsonNumber(let num) = dict["first"]! {
                         XCTAssert(num == 123)
                     } else {
                         XCTFail("Not a number")
                     }
-                    if case .JSONNumber(let num) = dict["second"]! {
+                    if case .jsonNumber(let num) = dict["second"]! {
                         XCTAssert(num == 234)
                     } else {
                         XCTFail("Not a number")
@@ -131,15 +131,15 @@ class DEjsonTests: XCTestCase {
 
     func testJSONDecoderComplex1() {
         let obj = JSONDecoder("[{\"t\":\"1\",\"v\":\"1\",\"b\":false},{\"t\":\"2\",\"v\":\"1\",\"b\":false},{\"t\":\"3\",\"v\":\"1\",\"b\":false}]").jsonObject
-        if case .JSONArray(let array) = obj {
+        if case .jsonArray(let array) = obj {
             XCTAssert(array.count == 3)
             for item in array {
-                if case .JSONDictionary(let dict) = item {
+                if case .jsonDictionary(let dict) = item {
                     XCTAssert(dict.keys.count == 3)
                     XCTAssertNotNil(dict["t"])
                     XCTAssertNotNil(dict["v"])
                     XCTAssertNotNil(dict["b"])
-                    if case .JSONString(let str) = dict["v"]! {
+                    if case .jsonString(let str) = dict["v"]! {
                         XCTAssert(str == "1")
                     } else {
                         XCTFail("v value is not a string")

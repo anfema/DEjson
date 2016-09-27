@@ -12,50 +12,50 @@
 
 import Foundation
 
-public class JSONDecoder {
-    public let string : String.UnicodeScalarView?
+open class JSONDecoder {
+    open let string : String.UnicodeScalarView?
     
     public init(_ string: String) {
         self.string = string.unicodeScalars
     }
 
-    public var jsonObject: JSONObject {
-        var generator = self.string!.generate()
+    open var jsonObject: JSONObject {
+        var generator = self.string!.makeIterator()
         let result = self.scanObject(&generator)
         return result.obj
     }
     
-    func scanObject(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar = UnicodeScalar(0)) -> (obj: JSONObject, backtrackChar: UnicodeScalar?) {
-        func parse(c: UnicodeScalar, inout generator: String.UnicodeScalarView.Generator) -> (obj: JSONObject?, backtrackChar: UnicodeScalar?) {
+    func scanObject(_ generator: inout String.UnicodeScalarView.Iterator, currentChar: UnicodeScalar = UnicodeScalar(0)) -> (obj: JSONObject, backtrackChar: UnicodeScalar?) {
+        func parse(_ c: UnicodeScalar, generator: inout String.UnicodeScalarView.Iterator) -> (obj: JSONObject?, backtrackChar: UnicodeScalar?) {
             switch c.value {
             case 9, 10, 13, 32: // space, tab, newline, cr
                 return (obj: nil, backtrackChar: nil)
             case 123: // {
                 if let dict = self.parseDict(&generator) {
-                    return (obj: .JSONDictionary(dict), backtrackChar: nil)
+                    return (obj: .jsonDictionary(dict), backtrackChar: nil)
                 } else {
-                    return (obj: .JSONInvalid, backtrackChar: nil)
+                    return (obj: .jsonInvalid, backtrackChar: nil)
                 }
             case 91: // [
-                return (obj: .JSONArray(self.parseArray(&generator)), backtrackChar: nil)
+                return (obj: .jsonArray(self.parseArray(&generator)), backtrackChar: nil)
             case 34: // "
-                return (obj: .JSONString(self.parseString(&generator)), backtrackChar: nil)
+                return (obj: .jsonString(self.parseString(&generator)), backtrackChar: nil)
             case 43, 45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57: // 0-9, -, +
                 let result = self.parseNumber(&generator, currentChar: c)
                 if let num = result.number {
-                    return (obj: .JSONNumber(num), backtrackChar: result.backtrackChar)
+                    return (obj: .jsonNumber(num), backtrackChar: result.backtrackChar)
                 } else {
-                    return (obj: .JSONInvalid, backtrackChar: result.backtrackChar)
+                    return (obj: .jsonInvalid, backtrackChar: result.backtrackChar)
                 }
             case 102, 110, 116: // f, n, t
                 if let b = self.parseStatement(&generator, currentChar: c) {
-					return (obj: .JSONBoolean(b), backtrackChar: nil)
+					return (obj: .jsonBoolean(b), backtrackChar: nil)
                 } else {
-                    return (obj: .JSONNull, backtrackChar: nil)
+                    return (obj: .jsonNull, backtrackChar: nil)
                 }
             default:
                 // found an invalid char
-                return (obj: .JSONInvalid, backtrackChar: nil)
+                return (obj: .jsonInvalid, backtrackChar: nil)
             }
         }
 
@@ -73,11 +73,11 @@ public class JSONDecoder {
             }
         }
         
-        return (obj: .JSONInvalid, backtrackChar: nil)
+        return (obj: .jsonInvalid, backtrackChar: nil)
     }
     
     // TODO: Add tests for escaped characters
-    func parseString(inout generator: String.UnicodeScalarView.Generator) -> (String) {
+    func parseString(_ generator: inout String.UnicodeScalarView.Iterator) -> (String) {
         var stringEnded = false
         var slash = false
         var string = String()
@@ -86,19 +86,19 @@ public class JSONDecoder {
             if slash {
                 switch c.value {
                 case 34: // "
-                    string.append(UnicodeScalar(34))
+                    string.append(String(describing: UnicodeScalar(34)))
                 case 110: // n -> linefeed
-                    string.append(UnicodeScalar(10))
+                    string.append(String(describing: UnicodeScalar(10)))
                 case 98: // b -> backspace
-                    string.append(UnicodeScalar(8))
+                    string.append(String(describing: UnicodeScalar(8)))
                 case 102: // f -> formfeed
-                    string.append(UnicodeScalar(12))
+                    string.append(String(describing: UnicodeScalar(12)))
                 case 114: // r -> carriage return
-                    string.append(UnicodeScalar(13))
+                    string.append(String(describing: UnicodeScalar(13)))
                 case 116: // t -> tab
-                    string.append(UnicodeScalar(9))
+                    string.append(String(describing: UnicodeScalar(9)))
                 case 92: // \ -> \
-                    string.append(UnicodeScalar(92))
+                    string.append(String(describing: UnicodeScalar(92)))
                 case 117: // u -> unicode value
                     // gather 4 chars
                     let d1 = self.parseHexDigit(generator.next())
@@ -113,9 +113,9 @@ public class JSONDecoder {
                         codepoint = 0x3F
                     }
                     
-                    string.append(UnicodeScalar(codepoint))
+                    string.append(String(describing: UnicodeScalar(codepoint)))
                 default:
-                    string.append(c)
+                    string.append(String(c))
                 }
                 slash = false
                 continue
@@ -128,17 +128,17 @@ public class JSONDecoder {
             case 34: // "
                 stringEnded = true
             default:
-                string.append(c)
+                string.append(String(c))
             }
             
             if stringEnded {
                 break
             }
         }
-        return string.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        return string.replacingOccurrences(of: "\\n", with: "\n")
     }
 
-    func parseHexDigit(digit: UnicodeScalar?) -> UInt32 {
+    func parseHexDigit(_ digit: UnicodeScalar?) -> UInt32 {
         guard let digit = digit else {
             return 0
         }
@@ -152,7 +152,7 @@ public class JSONDecoder {
         }
     }
     
-    func parseDict(inout generator: String.UnicodeScalarView.Generator) -> (Dictionary<String, JSONObject>?) {
+    func parseDict(_ generator: inout String.UnicodeScalarView.Iterator) -> (Dictionary<String, JSONObject>?) {
         var dict : Dictionary<String, JSONObject> = Dictionary()
         var dictKey: String? = nil
         var dictEnded = false
@@ -193,7 +193,7 @@ public class JSONDecoder {
         return dict
     }
 
-    func parseArray(inout generator: String.UnicodeScalarView.Generator) -> (Array<JSONObject>) {
+    func parseArray(_ generator: inout String.UnicodeScalarView.Iterator) -> (Array<JSONObject>) {
         var arr : Array<JSONObject> = Array()
         var arrayEnded = false
 
@@ -225,7 +225,7 @@ public class JSONDecoder {
     }
 
     // TODO: Add tests for negative numbers and exponential notations
-    func parseNumber(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar) -> (number: Double?, backtrackChar: UnicodeScalar?) {
+    func parseNumber(_ generator: inout String.UnicodeScalarView.Iterator, currentChar: UnicodeScalar) -> (number: Double?, backtrackChar: UnicodeScalar?) {
         var numberEnded = false
         var numberStarted = false
         var exponentStarted = false
@@ -237,7 +237,7 @@ public class JSONDecoder {
         var decimalCount : Int = 0
         var number : Double = 0.0
 
-        func parse(c: UnicodeScalar, inout generator: String.UnicodeScalarView.Generator) -> (numberEnded: Bool?, backtrackChar: UnicodeScalar?) {
+        func parse(_ c: UnicodeScalar, generator: inout String.UnicodeScalarView.Iterator) -> (numberEnded: Bool?, backtrackChar: UnicodeScalar?) {
             var backtrack: UnicodeScalar? = nil
             switch (c.value) {
             case 9, 10, 13, 32: // space, tab, newline, cr
@@ -327,15 +327,15 @@ public class JSONDecoder {
     }
 
     // TODO: Add tests for true, false and null
-    func parseStatement(inout generator: String.UnicodeScalarView.Generator, currentChar: UnicodeScalar) -> (Bool?) {
+    func parseStatement(_ generator: inout String.UnicodeScalarView.Iterator, currentChar: UnicodeScalar) -> (Bool?) {
         enum parseState {
-            case ParseStateUnknown
-            case ParseStateTrue(Int)
-            case ParseStateNull(Int)
-            case ParseStateFalse(Int)
+            case parseStateUnknown
+            case parseStateTrue(Int)
+            case parseStateNull(Int)
+            case parseStateFalse(Int)
             
             init() {
-                self = .ParseStateUnknown
+                self = .parseStateUnknown
             }
         }
         
@@ -343,42 +343,42 @@ public class JSONDecoder {
         
         switch currentChar.value {
         case 116: // t
-            state = .ParseStateTrue(1)
+            state = .parseStateTrue(1)
         case 110: // n
-            state = .ParseStateNull(1)
+            state = .parseStateNull(1)
         case 102: // f
-            state = .ParseStateFalse(1)
+            state = .parseStateFalse(1)
         default:
             return nil
         }
 
         while let c = generator.next() {
             switch state {
-            case .ParseStateUnknown:
+            case .parseStateUnknown:
                 return nil
-            case .ParseStateTrue(let index):
+            case .parseStateTrue(let index):
                     let search = "true"
-                    let i = search.unicodeScalars.startIndex.advancedBy(index)
+                    let i = search.unicodeScalars.index(search.unicodeScalars.startIndex, offsetBy: index)
                     if c == search.unicodeScalars[i] {
-                         state = .ParseStateTrue(index+1)
+                         state = .parseStateTrue(index+1)
                         if index == search.characters.count - 1 {
                             return true
                         }
                     }
-            case .ParseStateFalse(let index):
+            case .parseStateFalse(let index):
                 let search = "false"
-                let i = search.unicodeScalars.startIndex.advancedBy(index)
+                let i = search.unicodeScalars.index(search.unicodeScalars.startIndex, offsetBy: index)
                 if c == search.unicodeScalars[i] {
-                    state = .ParseStateFalse(index+1)
+                    state = .parseStateFalse(index+1)
                     if index == search.characters.count - 1 {
                         return false
                     }
                 }
-            case .ParseStateNull(let index):
+            case .parseStateNull(let index):
                 let search = "null"
-                let i = search.unicodeScalars.startIndex.advancedBy(index)
+                let i = search.unicodeScalars.index(search.unicodeScalars.startIndex, offsetBy: index)
                 if c == search.unicodeScalars[i] {
-                    state = .ParseStateNull(index+1)
+                    state = .parseStateNull(index+1)
                     if index == search.characters.count - 1{
                         return nil
                     }

@@ -12,15 +12,15 @@
 import Foundation
 
 public enum JSONObject {
-    case JSONArray(Array<JSONObject>)
-    case JSONDictionary(Dictionary<String, JSONObject>)
-    case JSONString(String)
-    case JSONNumber(Double)
-    case JSONBoolean(Bool)
-    case JSONNull
-    case JSONInvalid
+    case jsonArray(Array<JSONObject>)
+    case jsonDictionary(Dictionary<String, JSONObject>)
+    case jsonString(String)
+    case jsonNumber(Double)
+    case jsonBoolean(Bool)
+    case jsonNull
+    case jsonInvalid
     
     public init(_ string: String) {
-        self = .JSONInvalid
+        self = .jsonInvalid
     }
 }

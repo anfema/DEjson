@@ -24,52 +24,49 @@ func * (left: String, right: Int) -> String {
     return result
 }
 
-func -(left: String.Index, right: Int) -> String.Index {
-	return left.advancedBy(-right)
-}
 
 // TODO: Add tests for JSONEncoder
-public class JSONEncoder {
+open class JSONEncoder {
     let jsonObject: JSONObject
     
     public init(_ jsonObject: JSONObject) {
         self.jsonObject = jsonObject
     }
     
-    public var jsonString: String? {
+    open var jsonString: String? {
         return decodeObject(self.jsonObject)
     }
 
-    public var prettyJSONString: String? {
+    open var prettyJSONString: String? {
         return decodeObject(self.jsonObject, prettyPrint: true)
     }
 
     
-    func decodeObject(jsonObject: JSONObject, prettyPrint: Bool = false, indent: Int = 0) -> String? {
+    func decodeObject(_ jsonObject: JSONObject, prettyPrint: Bool = false, indent: Int = 0) -> String? {
         var result: String
 
         switch jsonObject {
-        case .JSONNumber(let number):
+        case .jsonNumber(let number):
             result = "\(number)"
-        case .JSONString(let string):
+        case .jsonString(let string):
             result = "\"" + self.encodeString(string) + "\""
-        case .JSONBoolean(let value):
+        case .jsonBoolean(let value):
 			if value {
 				result = "true"
 			} else {
 				result = "false"
 			}
-        case .JSONNull:
+        case .jsonNull:
             result = "null"
-        case .JSONInvalid:
+        case .jsonInvalid:
             return nil
-        case .JSONArray(let arr):
+        case .jsonArray(let arr):
             result = prettyPrint ? "[\n" : "["
-            for (index, item) in arr.enumerate() {
+            for (index, item) in arr.enumerated() {
                 if let string = decodeObject(item, prettyPrint: prettyPrint, indent: indent + 4) {
                     if index > 0 {
-                        if prettyPrint && result[result.endIndex - 1] == "\n" {
-                            result.removeAtIndex(result.endIndex - 1)
+                        if prettyPrint &&  result[result.index(before: result.endIndex)] == "\n" {
+                            result.remove(at: result.index(before: result.endIndex))
                         }
                         result += prettyPrint ? ",\n" : ","
                     }
@@ -81,14 +78,14 @@ public class JSONEncoder {
                 }
             }
             result += prettyPrint ? " " * indent + "]" : "]"
-        case .JSONDictionary(let dict):
+        case .jsonDictionary(let dict):
             result = prettyPrint ? "{\n" : "{"
             var first = true
             for (key, value) in dict {
                 if let string = decodeObject(value, prettyPrint: prettyPrint, indent: indent + 4) {
                     if !first {
-                        if prettyPrint && result[result.endIndex - 1] == "\n" {
-                            result.removeAtIndex(result.endIndex - 1)
+                        if prettyPrint && result[result.index(before: result.endIndex)] == "\n" {
+                            result.remove(at: result.index(before: result.endIndex))
                         }
                         result += prettyPrint ? ",\n" : ","
                     } else {
@@ -107,37 +104,37 @@ public class JSONEncoder {
         return result
     }
     
-    func encodeString(string: String) -> String {
+    func encodeString(_ string: String) -> String {
         var result:String = ""
-        var generator = string.unicodeScalars.generate()
+        var generator = string.unicodeScalars.makeIterator()
 
         while let c = generator.next() {
             switch c.value {
             case 8: // b -> backspace
-                result.append(UnicodeScalar(92))
-                result.append(UnicodeScalar(98))
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(98)))
             case 9: // t -> tab
-                result.append(UnicodeScalar(92))
-                result.append(UnicodeScalar(116))
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(116)))
             case 10: // n -> linefeed
-                result.append(UnicodeScalar(92))
-                result.append(UnicodeScalar(110))
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(110)))
             case 12: // f -> formfeed
-                result.append(UnicodeScalar(92))
-                result.append(UnicodeScalar(102))
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(102)))
             case 13: // r -> carriage return
-                result.append(UnicodeScalar(92))
-                result.append(UnicodeScalar(114))
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(114)))
             case 34: // "
-                result.append(UnicodeScalar(92))
-                result.append(c)
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(c))
             case 92: // \ -> \
-                result.append(UnicodeScalar(92))
-                result.append(c)
+                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(c))
             default:
                 if c.value > 128 {
-                    result.append(UnicodeScalar(92))
-                    result.append(UnicodeScalar(117)) // u
+                    result.append(String(describing: UnicodeScalar(92)))
+                    result.append(String(describing: UnicodeScalar(117))) // u
 
                     let high = UInt8((c.value >> 8) & 0xff)
                     let low = UInt8(c.value & 0xff)
@@ -145,21 +142,21 @@ public class JSONEncoder {
                     // This is so convoluted because of Swift compiler bug on iOS 8.4 (works simpler on 9.0+)
                     var highString = self.makeHexString(high)
                     var lowString = self.makeHexString(low)
-                    var lowGen = lowString.unicodeScalars.generate()
-                    var highGen = highString.unicodeScalars.generate()
-                    result.append(highGen.next()!)
-                    result.append(highGen.next()!)
-                    result.append(lowGen.next()!)
-                    result.append(lowGen.next()!)
+                    var lowGen = lowString.unicodeScalars.makeIterator()
+                    var highGen = highString.unicodeScalars.makeIterator()
+                    result.append(String(highGen.next()!))
+                    result.append(String(highGen.next()!))
+                    result.append(String(lowGen.next()!))
+                    result.append(String(lowGen.next()!))
                 } else {
-                    result.append(c)
+                    result.append(String(c))
                 }
             }
         }
         return result
     }
     
-    func makeHexString(value: UInt8) -> String {
+    func makeHexString(_ value: UInt8) -> String {
         return NSString(format: "%02x", value) as String
     }
 }
