@@ -111,30 +111,30 @@ open class JSONEncoder {
         while let c = generator.next() {
             switch c.value {
             case 8: // b -> backspace
-                result.append(String(describing: UnicodeScalar(92)))
-                result.append(String(describing: UnicodeScalar(98)))
+                result.append(String(describing: UnicodeScalar(92)!))
+                result.append(String(describing: UnicodeScalar(98)!))
             case 9: // t -> tab
-                result.append(String(describing: UnicodeScalar(92)))
-                result.append(String(describing: UnicodeScalar(116)))
+                result.append(String(describing: UnicodeScalar(92)!))
+                result.append(String(describing: UnicodeScalar(116)!))
             case 10: // n -> linefeed
-                result.append(String(describing: UnicodeScalar(92)))
-                result.append(String(describing: UnicodeScalar(110)))
+                result.append(String(describing: UnicodeScalar(92)!))
+                result.append(String(describing: UnicodeScalar(110)!))
             case 12: // f -> formfeed
-                result.append(String(describing: UnicodeScalar(92)))
-                result.append(String(describing: UnicodeScalar(102)))
+                result.append(String(describing: UnicodeScalar(92)!))
+                result.append(String(describing: UnicodeScalar(102)!))
             case 13: // r -> carriage return
-                result.append(String(describing: UnicodeScalar(92)))
-                result.append(String(describing: UnicodeScalar(114)))
+                result.append(String(describing: UnicodeScalar(92)!))
+                result.append(String(describing: UnicodeScalar(114)!))
             case 34: // "
-                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(92)!))
                 result.append(String(c))
             case 92: // \ -> \
-                result.append(String(describing: UnicodeScalar(92)))
+                result.append(String(describing: UnicodeScalar(92)!))
                 result.append(String(c))
             default:
                 if c.value > 128 {
-                    result.append(String(describing: UnicodeScalar(92)))
-                    result.append(String(describing: UnicodeScalar(117))) // u
+                    result.append(String(describing: UnicodeScalar(92)!))
+                    result.append(String(describing: UnicodeScalar(117)!)) // u
 
                     let high = UInt8((c.value >> 8) & 0xff)
                     let low = UInt8(c.value & 0xff)

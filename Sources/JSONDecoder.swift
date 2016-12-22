@@ -86,19 +86,19 @@ open class JSONDecoder {
             if slash {
                 switch c.value {
                 case 34: // "
-                    string.append(String(describing: UnicodeScalar(34)))
+                    string.append(String(describing: UnicodeScalar(34)!))
                 case 110: // n -> linefeed
-                    string.append(String(describing: UnicodeScalar(10)))
+                    string.append(String(describing: UnicodeScalar(10)!))
                 case 98: // b -> backspace
-                    string.append(String(describing: UnicodeScalar(8)))
+                    string.append(String(describing: UnicodeScalar(8)!))
                 case 102: // f -> formfeed
-                    string.append(String(describing: UnicodeScalar(12)))
+                    string.append(String(describing: UnicodeScalar(12)!))
                 case 114: // r -> carriage return
-                    string.append(String(describing: UnicodeScalar(13)))
+                    string.append(String(describing: UnicodeScalar(13)!))
                 case 116: // t -> tab
-                    string.append(String(describing: UnicodeScalar(9)))
+                    string.append(String(describing: UnicodeScalar(9)!))
                 case 92: // \ -> \
-                    string.append(String(describing: UnicodeScalar(92)))
+                    string.append(String(describing: UnicodeScalar(92)!))
                 case 117: // u -> unicode value
                     // gather 4 chars
                     let d1 = self.parseHexDigit(generator.next())
@@ -113,7 +113,7 @@ open class JSONDecoder {
                         codepoint = 0x3F
                     }
                     
-                    string.append(String(describing: UnicodeScalar(codepoint)))
+                    string.append(String(describing: UnicodeScalar(codepoint)!))
                 default:
                     string.append(String(c))
                 }
