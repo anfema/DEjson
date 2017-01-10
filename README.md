@@ -1,6 +1,9 @@
 # DEjson
 
-JSON parser in Swift with simple mapping functionality
+Error resilient JSON parser and serializer in pure swift
+.
+- Parses JSON files with minor errors (additional commas, etc.)
+- Serializes JSON in minified and pretty printed formats
 
 ## Requirements
 
