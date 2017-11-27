@@ -361,7 +361,7 @@ open class JSONDecoder {
                     let i = search.unicodeScalars.index(search.unicodeScalars.startIndex, offsetBy: index)
                     if c == search.unicodeScalars[i] {
                          state = .parseStateTrue(index+1)
-                        if index == search.characters.count - 1 {
+                        if index == search.count - 1 {
                             return true
                         }
                     }
@@ -370,7 +370,7 @@ open class JSONDecoder {
                 let i = search.unicodeScalars.index(search.unicodeScalars.startIndex, offsetBy: index)
                 if c == search.unicodeScalars[i] {
                     state = .parseStateFalse(index+1)
-                    if index == search.characters.count - 1 {
+                    if index == search.count - 1 {
                         return false
                     }
                 }
@@ -379,7 +379,7 @@ open class JSONDecoder {
                 let i = search.unicodeScalars.index(search.unicodeScalars.startIndex, offsetBy: index)
                 if c == search.unicodeScalars[i] {
                     state = .parseStateNull(index+1)
-                    if index == search.characters.count - 1{
+                    if index == search.count - 1{
                         return nil
                     }
                 }
