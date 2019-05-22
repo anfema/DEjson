@@ -13,7 +13,7 @@
 import Foundation
 
 open class JSONDecoder {
-    open let string : String.UnicodeScalarView?
+    public let string : String.UnicodeScalarView?
     
     public init(_ string: String) {
         self.string = string.unicodeScalars
