@@ -140,8 +140,8 @@ open class JSONEncoder {
                     let low = UInt8(c.value & 0xff)
                     
                     // This is so convoluted because of Swift compiler bug on iOS 8.4 (works simpler on 9.0+)
-                    var highString = self.makeHexString(high)
-                    var lowString = self.makeHexString(low)
+                    let highString = self.makeHexString(high)
+                    let lowString = self.makeHexString(low)
                     var lowGen = lowString.unicodeScalars.makeIterator()
                     var highGen = highString.unicodeScalars.makeIterator()
                     result.append(String(highGen.next()!))
